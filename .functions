@@ -1,0 +1,114 @@
+#!/bin/bash
+
+# get the user's attention
+# uses terminal-notifier to trigger a message in OSX notifications area
+function attention() {
+    if [[ $# -eq 0 ]]; then
+        message='Your attention is requested'
+    else
+        message=$1
+    fi
+    tput bel
+    if which terminal-notifier >/dev/null 2>&1; then
+        terminal-notifier -message "${message}"
+    fi
+    say -v 'Zarvox' "${message}"
+}
+
+# wait for some process to end, then run something
+function wait_for_proc() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage run_when_done <wait_for_process> <command_to_run>"
+        return
+    fi
+    wait_for_process=$1
+    command_to_run=$2
+    if [[ ! -x ${command_to_run} ]]; then
+        command_to_run=attention
+    fi
+    while true; do
+        # -i Ignore case
+        # -f Match against the full arguments list
+        # -q Do not write anything to stdout
+        if pgrep -i -f -q "${wait_for_process}"; then
+            break
+        fi
+        sleep 2
+    done
+    $command_to_run
+}
+
+function git_list_changed_files() {
+    if [[ $# -eq 0 ]]; then
+        rev='HEAD'
+    else
+        rev=$1
+    fi
+    git diff-tree --no-commit-id --name-only -r "${rev}"
+}
+
+# http://stackoverflow.com/questions/10312521/how-to-fetch-all-git-branches
+function git_fetch_all() {
+    for remote in $(git branch -r | awk '{print $1}' | grep origin); do
+        local=${remote//origin\//}
+        git branch --track "${local}" "${remote}";
+    done
+    git fetch --all
+    echo "You may next want to run:"
+    echo "git pull --all"
+}
+
+# Diff between current *commit* and previous commit
+# unlike "git diff" that shows diff between the current *working copy* and
+# previous commit
+# usage: git_diff [<age>]
+# e.g.: git_diff 3
+function git_diff() {
+    if [[ $# -eq 0 ]]; then
+        age='1'
+    else
+        age=$1
+    fi
+    git diff --color-words "HEAD~${age}"
+}
+
+# Maintenance task that attempts to soft delete all feature branches
+# If a feature is not merged nothing happens
+# usage: git_delete_features
+function git_delete_features() {
+    for branch in $(git branch | awk '$1~"^feature" {print $1}'); do
+        git branch --delete "${branch}"
+    done
+}
+
+# type some text using AppleScript
+# for when you have some stubborn application that won't accept paste
+function typetext() {
+    text_to_type=$*
+    if [[ -z $text_to_type ]]; then
+        echo "Usage: typetext <text-to-type>"
+        return
+    fi
+    echo -n "Apply focus to the text input within the next five seconds... 5..."
+    sleep 1;
+    echo -n " 4..."
+    sleep 1;
+    echo -n " 3..."
+    sleep 1;
+    echo -n " 2..."
+    sleep 1;
+    echo -n " 1..."
+    sleep 1;
+    osascript -e "tell application \"System Events\" to keystroke \"${text_to_type}\""
+    echo " Done."
+    # send bell to help make you know when typing is done
+    # this way you know when to press enter
+    # as you need to focus on the text input, the terminal that does the typing
+    # may be hidden from view
+    attention "Typing complete"
+}
+
+# type what's in the pasteboard
+function typepb() {
+    typetext "$(pbpaste)"
+}

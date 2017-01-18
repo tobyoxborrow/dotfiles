@@ -1,0 +1,8 @@
+#!/bin/bash
+# Set up various environments
+
+source ~/.environments.homebrew
+source ~/.environments.pyenv
+source ~/.environments.perlbrew
+source ~/.environments.fzf
+source ~/.environments.rvm

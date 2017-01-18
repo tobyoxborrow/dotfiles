@@ -1,0 +1,7 @@
+#!/bin/bash
+# Extend PATH
+
+# Private binaries
+if [[ -d "${HOME}/bin" ]]; then
+    export PATH="${HOME}/bin:${PATH}";
+fi

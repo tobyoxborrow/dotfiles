@@ -1,0 +1,33 @@
+# .screenrc
+# Screen Configuration
+
+autodetach      on
+crlf            off
+deflogin        off
+hardcopy_append on
+startup_message off
+vbell           off
+defscrollback   32768
+silencewait     15
+hardstatus      off
+
+activity "%c activity -> %n%f %t"
+bell "%c bell -> %n%f %t^G"
+vbell_msg " *beep* "
+caption always " %m%d %c |  %w"
+
+bind ~ activity       "%c activity -> %n%f %t"
+bind * activity       "%c activity -> %n%f %t"
+
+# helpful status bar contains:
+# (left) numbered windows (right) @hostname - date - time
+caption always "%{= ..}%-w%{= bW}%n %t%{-}%+w %-= @%H - %D %d %M - %c"
+
+# games are cool
+nethack on
+
+# Always start `screen` with UTF-8 enabled (`screen -U`)
+defutf8 on
+
+# simulate login (so bash profile/rc are sourced as I would expect)
+shell -bash

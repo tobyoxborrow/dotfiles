@@ -1,0 +1,11 @@
+# Homebrew
+if [[ -d /usr/local/bin/ ]]; then
+    export PATH="/usr/local/bin:${PATH}"
+    # coreutils gnubin
+    if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
+        export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
+    fi
+fi
+if [[ -d /usr/local/sbin/ ]]; then
+    export PATH="/usr/local/sbin:${PATH}"
+fi

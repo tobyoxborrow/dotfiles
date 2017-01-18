@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# Dynamic Prompt - minimal but informative
+# ~ (toby user on primary workstation in $HOME)
+# % (toby user on primary workstation in some other dir)
+# @host~ (toby user on host "host" in $HOME)
+# root@host:/var/log# (root user on host "host" in "/var/log")
+# some information we need to contruct the prompt
+HOSTNAME=$(uname -n)
+USER=$(whoami)
+PROMPT_USER="${USER}"
+if [ "${USER}" == "toby" ]; then
+    PROMPT_USER=""
+fi
+if [ "${USER}" == "tobyox" ]; then
+    PROMPT_USER=""
+fi
+PROMPT_HOSTNAME="@\H"
+if [ "${HOSTNAME}" == "TOBYOX-M-N20Q" ]; then
+    PROMPT_HOSTNAME=""
+fi
+MY_OLDPWD="${PWD}"
+
+GIT_PROMPT=""
+if [[ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]]; then
+    source /usr/local/etc/bash_completion.d/git-prompt.sh
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWUNTRACKEDFILES=1
+    export GIT_PS1_SHOWUPSTREAM="verbose name"
+    export GIT_PS1_SHOWCOLORHINTS=""
+    export GIT_PS1_SHOWSTASHSTATE=""
+    GIT_PROMPT='$(__git_ps1 "(%s) ")'
+fi
+
+# colour codes
+# colours need to be escaped with \[ \] in prompts so the shell can count the
+# proper length. otherwise the prompt gets corrupted when scrolling up/down
+C_OFF='\e[0m'
+#C_BOLD="\e[1m"
+#C_UNDERSCORE="\e[4m"
+#C_REVERSE="\e[7m"
+C_RED='\e[1;31m'
+#C_GREEN='\e[32;1m'
+#C_YELLOW='\e[33;1m'
+C_BLUE='\e[34;1m'
+#C_MAGENTA='\e[35;1m'
+#C_CYAN='\e[36;1m'
+#C_WHITE='\e[37;1m'
+
+function dynamicPrompt {
+    EXITSTATUS="$?"
+    PROMPT_COLOUR="${C_OFF}"
+    if [ "${EXITSTATUS}" -gt 0 ]; then
+        PROMPT_COLOUR="${C_RED}"
+    fi
+    PROMPT_END="~"
+    if [ "${PWD}" != "${HOME}" ]; then
+        PROMPT_END="%"
+    fi
+    if [ "${USER}" == "root" ]; then
+        PROMPT_END="#"
+    fi
+    PS1="${GIT_PROMPT}\[${PROMPT_COLOUR}\]${PROMPT_USER}${PROMPT_HOSTNAME}${PROMPT_END}\[${C_OFF}\] "
+    if [ "${PWD}" != "${MY_OLDPWD}" ]; then
+        MY_OLDPWD="${PWD}"
+        if [[ ${BASH_VERSINFO[0]} -gt 3 ]]; then
+            # these colourcodes don't seem to work on OSX's bash v3
+            echo -e "${C_OFF}cwd: ${C_BLUE}${PWD}${C_OFF}"
+        fi
+    fi
+}
+PROMPT_COMMAND=dynamicPrompt
