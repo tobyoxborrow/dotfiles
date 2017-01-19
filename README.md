@@ -10,7 +10,8 @@ for my dotfiles.
 
 ## Usage
 
-Includes a script to take care of symlinks.
+Includes `dotfiles.sh` to take care of creating symlinks in ~ to `~/.dotfiles`.
+If there are existing files, they will be moved to `~/.dotfiles_backup`.
 
 ```
 git clone https://github.com/tobyoxborrow/dotfiles ~/.dotfiles/ && bash ~/.dotfiles/dotfiles.sh
