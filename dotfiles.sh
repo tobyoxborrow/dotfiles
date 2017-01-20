@@ -43,25 +43,21 @@ for dotfile in "${dotfiles[@]}"; do
     home_path="${HOME}/${dotfile}"
     repo_path="${dotfiles_dir}/${dotfile}"
 
-    echo -n "$dotfile: "
-
     if [[ ! -f $repo_path ]]; then
-        echo "not found in .dotfiles, skipping"
+        echo "${dotfile}: not found in .dotfiles, skipping"
     elif [[ ! -f $home_path ]]; then
-        echo "not found, creating symlink"
+        echo "${dotfile}: not found, creating symlink"
         ln -s "$repo_path" "$home_path"
     elif [[ -h $home_path ]]; then
-        if [[ "$(readlink -f "$home_path")" == "$repo_path" ]]; then
-            echo "ok"
-        else
-            echo "wrong symlink, overwriting"
+        if [[ "$(readlink -f "$home_path")" != "$repo_path" ]]; then
+            echo "${dotfile}: wrong symlink, overwriting"
             ln -sfT "$repo_path" "$home_path"
         fi
     elif [[ -f $home_path ]]; then
-        echo "regular file, replacing with symlink"
+        echo "${dotfile}: regular file, replacing with symlink"
         mv "$home_path" "$backup_dir"
         ln -s "$repo_path" "$home_path"
     else
-        echo "unknown, skipping"
+        echo "${dotfile}: unknown, skipping"
     fi
 done
