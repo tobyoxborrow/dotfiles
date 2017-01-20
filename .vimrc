@@ -7,7 +7,7 @@
 " https://github.com/alanctkc/dotfiles/
 " https://github.com/netdata/vim/
 
-" Basic options -------------------------------------------------------- {{{
+" Basic options --------------------------------------------------------
 
 set encoding=utf-8
 
@@ -81,7 +81,7 @@ set wildignore+=*.DS_Store " OSX bullshit
 "set clipboard=unnamed
 
 
-" Backups and file locations --------------------------------------------- {{{
+" Backups and file locations ---------------------------------------------
 
 " Make those folders automatically if they don't exist
 set backupdir=~/.vim/tmp/backup// " backup files
@@ -103,7 +103,7 @@ set backup
 set noswapfile
 
 
-" Functions and autocommands --------------------------------------------- {{{
+" Functions and autocommands ---------------------------------------------
 
 " removes trailing spaces
 function TrimWhiteSpace()
@@ -121,7 +121,7 @@ augroup line_return
 augroup END
 
 
-" Key Bindings ----------------------------------------------------------- {{{
+" Key Bindings -----------------------------------------------------------
 
 " Use comma as leader
 let mapleader = ','
@@ -176,7 +176,7 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 
-" Plugins ---------------------------------------------------------------- {{{
+" Plugins ----------------------------------------------------------------
 
 " Use vim-plug for plugins
 " https://github.com/junegunn/vim-plug
@@ -299,7 +299,7 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
 endif
 
 
-" Colours ---------------------------------------------------------------- {{{
+" Colours ----------------------------------------------------------------
 
 " highlight trailing whitespace (must come before 'colorscheme')
 autocmd ColorScheme * highlight TrailingWhitespace ctermbg=red guibg=red
