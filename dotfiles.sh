@@ -27,6 +27,7 @@ dotfiles=(
     .gitignore
     .inputrc
     .path
+    .profile
     .rvmrc
     .screenrc
     .tmux.conf
