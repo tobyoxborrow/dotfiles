@@ -4,5 +4,5 @@
 source ~/.environments.homebrew
 source ~/.environments.pyenv
 source ~/.environments.perlbrew
-source ~/.environments.fzf
+source ~/.environments.fasd
 source ~/.environments.rvm

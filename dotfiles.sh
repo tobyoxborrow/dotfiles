@@ -16,7 +16,7 @@ dotfiles=(
     .bashrc
     .curlrc
     .environments
-    .environments.fzf
+    .environments.fasd
     .environments.homebrew
     .environments.perlbrew
     .environments.pyenv
