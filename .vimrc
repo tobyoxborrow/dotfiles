@@ -187,43 +187,43 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
 
     " Fuzzy file, buffer, mru, tag, etc finder.
     "Plug 'https://github.com/kien/ctrlp.vim.git'
-    Plug 'https://github.com/ctrlpvim/ctrlp.vim.git'
+    Plug 'https://github.com/ctrlpvim/ctrlp.vim'
     " A tree explorer plugin for vim.
-    "Plug 'https://github.com/scrooloose/nerdtree.git'
+    "Plug 'https://github.com/scrooloose/nerdtree'
     " Puppet niceties for your Vim setup
-    "Plug 'https://github.com/rodjek/vim-puppet.git'
+    "Plug 'https://github.com/rodjek/vim-puppet'
     " Semantic Highlighting for Vim http://jaxbot.me/
-    "Plug 'https://github.com/jaxbot/semantic-highlight.vim.git'
+    "Plug 'https://github.com/jaxbot/semantic-highlight.vim'
     " Syntax checking hacks for vim
-    Plug 'https://github.com/scrooloose/syntastic.git'
+    Plug 'https://github.com/scrooloose/syntastic'
     " Vim script for text filtering and alignment
-    "Plug 'https://github.com/godlygeek/tabular.git'
+    "Plug 'https://github.com/godlygeek/tabular'
     " lean & mean status/tabline for vim that's light as air
-    Plug 'https://github.com/bling/vim-airline.git'
+    Plug 'https://github.com/bling/vim-airline'
     " theme repository for vim-airline
     Plug 'https://github.com/vim-airline/vim-airline-themes'
     " one colorscheme pack to rule them all!
-    Plug 'https://github.com/flazz/vim-colorschemes.git'
+    Plug 'https://github.com/flazz/vim-colorschemes'
     " fugitive.vim: a Git wrapper so awesome, it should be illegal
-    Plug 'https://github.com/tpope/vim-fugitive.git'
+    Plug 'https://github.com/tpope/vim-fugitive'
     " sensible.vim: Defaults everyone can agree on
-    Plug 'https://github.com/tpope/vim-sensible.git'
+    Plug 'https://github.com/tpope/vim-sensible'
     " Plugin for transparent editing of gpg encrypted files.
-    Plug 'https://github.com/vim-scripts/gnupg.vim.git'
+    Plug 'https://github.com/vim-scripts/gnupg.vim'
     " use CTRL-A/CTRL-X to increment dates, times, and more
-    "Plug 'https://github.com/tpope/vim-speeddating.git'
+    "Plug 'https://github.com/tpope/vim-speeddating'
     " comment stuff out
-    "Plug 'https://github.com/tpope/vim-commentary.git'
+    "Plug 'https://github.com/tpope/vim-commentary'
     " Smart Space key for Vim
-    "Plug 'https://github.com/spiiph/vim-space.git'
+    "Plug 'https://github.com/spiiph/vim-space'
     " helpers for UNIX
-    Plug 'https://github.com/tpope/vim-eunuch.git'
+    Plug 'https://github.com/tpope/vim-eunuch'
     " pairs of handy bracket mappings
-    Plug 'https://github.com/tpope/vim-unimpaired.git'
-    " Stupid
-    Plug 'https://github.com/koron/nyancat-vim.git'
+    Plug 'https://github.com/tpope/vim-unimpaired'
+    " Essential Stupid
+    Plug 'https://github.com/koron/nyancat-vim'
     "  Vim plugin for the Perl module / CLI script 'ack'
-    Plug 'https://github.com/mileszs/ack.vim.git'
+    Plug 'https://github.com/mileszs/ack.vim'
     " Vim motions on speed!
     Plug 'https://github.com/Lokaltog/vim-easymotion'
     " Next generation completion framework after neocomplcache
@@ -233,7 +233,7 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     " stages/reverts hunks
     Plug 'https://github.com/airblade/vim-gitgutter'
     " Uncover usage problems in your writing
-    Plug 'https://github.com/reedes/vim-wordy'
+    "Plug 'https://github.com/reedes/vim-wordy'
     " Easy note taking in Vim http://peterodding.com/code/vim/notes/
     "Plug 'https://github.com/xolox/vim-notes'
     " Miscellaneous auto-load Vim scripts http://peterodding.com/code/vim/misc/
@@ -242,7 +242,10 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     Plug 'https://github.com/chase/vim-ansible-yaml'
     " allows you to find and replace occurrences in many buffers being aware
     " of the context
-    Plug 'https://github.com/pelodelfuego/vim-swoop'
+    "Plug 'https://github.com/pelodelfuego/vim-swoop'
+    " Source code browser (supports C/C++, java, perl, python, tcl, sql, php,
+    " etc)
+    Plug 'https://github.com/vim-scripts/taglist.vim'
 
     call plug#end()
 
