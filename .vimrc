@@ -139,21 +139,24 @@ if exists('+relativenumber')
     nnoremap <Leader>n :set norelativenumber!<CR>
 endif
 " map ,P to paste from clipboard
-set pastetoggle=<Leader>P
+"set pastetoggle=<Leader>P
 " map ,p to toggle paste mode
 "nnoremap <Leader>p :set nopaste!<CR>
 " map ,s to run sort
-nnoremap <Leader>s :sort<CR>
+"nnoremap <Leader>s :sort<CR>
 " map ,t to call TrimWhiteSpace()
 nnoremap <Leader>t :call TrimWhiteSpace()<CR>
 " map ,u to write all buffers with changes
-nnoremap <Leader>u :bufdo update<CR>
-" map ,p to call CtrlP
-nnoremap <leader>p :CtrlP<cr>
-" additional mappings for CtrlP modes
-nnoremap <leader>bb :CtrlPBuffer<cr>
-nnoremap <leader>bm :CtrlPMixed<cr>
-nnoremap <leader>bs :CtrlPMRU<cr>
+nnoremap <Leader>bu :bufdo update<CR>
+" map ,p* for CtrlP modes
+nnoremap <leader>pt :CtrlPTag<cr>
+nnoremap <leader>pb :CtrlPBuffer<cr>
+nnoremap <leader>pm :CtrlPMixed<cr>
+nnoremap <leader>ps :CtrlPMRU<cr>
+" map ,c to update ctags
+nnoremap <Leader>ct :!/usr/local/bin/ctags -R --languages=Python --exclude=.git .<CR>
+" map ,l to open/close the taglist
+nnoremap <Leader>tl :TlistToggle<CR>
 
 " re-map visual-mode indenting to not lose the selection
 vnoremap < <gv
