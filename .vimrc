@@ -157,6 +157,10 @@ nnoremap <leader>ps :CtrlPMRU<cr>
 nnoremap <Leader>ct :!/usr/local/bin/ctags -R --languages=Python --exclude=.git .<CR>
 " map ,l to open/close the taglist
 nnoremap <Leader>tl :TlistToggle<CR>
+" map ,u to toggle gundo
+nnoremap <Leader>u :GundoToggle<CR>
+" map ,<space> to clear search highlighting
+noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
 " re-map visual-mode indenting to not lose the selection
 vnoremap < <gv
@@ -167,9 +171,6 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
-
-" clear search highlighting
-noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
 " re-map tab to match parens
 map <tab> %
@@ -189,14 +190,9 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     call plug#begin('~/.vim/plugged')
 
     " Fuzzy file, buffer, mru, tag, etc finder.
-    "Plug 'https://github.com/kien/ctrlp.vim.git'
     Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-    " A tree explorer plugin for vim.
-    "Plug 'https://github.com/scrooloose/nerdtree'
     " Puppet niceties for your Vim setup
     "Plug 'https://github.com/rodjek/vim-puppet'
-    " Semantic Highlighting for Vim http://jaxbot.me/
-    "Plug 'https://github.com/jaxbot/semantic-highlight.vim'
     " Syntax checking hacks for vim
     Plug 'https://github.com/scrooloose/syntastic'
     " Vim script for text filtering and alignment
@@ -213,12 +209,6 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     Plug 'https://github.com/tpope/vim-sensible'
     " Plugin for transparent editing of gpg encrypted files.
     Plug 'https://github.com/vim-scripts/gnupg.vim'
-    " use CTRL-A/CTRL-X to increment dates, times, and more
-    "Plug 'https://github.com/tpope/vim-speeddating'
-    " comment stuff out
-    "Plug 'https://github.com/tpope/vim-commentary'
-    " Smart Space key for Vim
-    "Plug 'https://github.com/spiiph/vim-space'
     " helpers for UNIX
     Plug 'https://github.com/tpope/vim-eunuch'
     " pairs of handy bracket mappings
@@ -235,51 +225,47 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     " A Vim plugin which shows a git diff in the gutter (sign column) and
     " stages/reverts hunks
     Plug 'https://github.com/airblade/vim-gitgutter'
-    " Uncover usage problems in your writing
-    "Plug 'https://github.com/reedes/vim-wordy'
-    " Easy note taking in Vim http://peterodding.com/code/vim/notes/
-    "Plug 'https://github.com/xolox/vim-notes'
-    " Miscellaneous auto-load Vim scripts http://peterodding.com/code/vim/misc/
-    Plug 'https://github.com/xolox/vim-misc'
     " Add additional support for Ansible in VIM
     Plug 'https://github.com/chase/vim-ansible-yaml'
-    " allows you to find and replace occurrences in many buffers being aware
-    " of the context
-    "Plug 'https://github.com/pelodelfuego/vim-swoop'
     " Source code browser (supports C/C++, java, perl, python, tcl, sql, php,
     " etc)
     Plug 'https://github.com/vim-scripts/taglist.vim'
+    " visualize your Vim undo tree
+    Plug 'https://github.com/sjl/gundo.vim'
 
     call plug#end()
 
     " Plugin Configuration
+
     " Airline
-    " do not use the fancy symbols in airline
+    " don't use fancy symbols in airline
+    " requires too much effort to display well in iTerm2 and I like it plain
     let g:airline_powerline_fonts = 0
-    " don't use fancy symbols in airline (if they don't display well in iTerm2)
-    let g:airline_left_sep=''
-    let g:airline_right_sep=''
+    let g:airline_left_sep = ''
+    let g:airline_right_sep = ''
     " airline theme
-    let g:airline_theme='papercolor'
+    let g:airline_theme = 'papercolor'
     " display buffers
     let g:airline#extensions#tabline#enabled = 1
 
     " Syntastic
     " don't run syntastic on :wq which can cause an unnecessary delay
-    let g:syntastic_check_on_wq=0
+    let g:syntastic_check_on_wq = 0
 
     " CTRL+P
     " enable ctrl+p
     set runtimepath^=~/.vim/bundle/ctrlp.vim
-
     " Use the nearest .git directory as the cwd
-    " This makes a lot of sense if you are working on a project that is in version
-    " control. It also supports works with .svn, .hg, .bzr.
+    " This makes a lot of sense if you are working on a project that is in
+    " version control. It also supports works with .svn, .hg, .bzr.
     let g:ctrlp_working_path_mode = 'r'
 
-    " Semantic highlight colours
-    " run RebuildSemanticColors to flush the cache
-    "let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
+    " if the ag executable is found, we can make use of that instead of some
+    " command defaults
+    if executable('ag')
+        let g:ctrlp_user_command = 'ag %s --files-with-matches --nocolor -g ""'
+        let g:ackprg = 'ag --vimgrep'
+    endif
 
     " neocomplete
     " Disable AutoComplPop.
