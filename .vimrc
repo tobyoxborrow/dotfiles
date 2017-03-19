@@ -126,36 +126,26 @@ augroup END
 " Use comma as leader
 let mapleader = ','
 
-" map ,a to start Ack
-nnoremap <Leader>a :Ack<SPACE>--smart-case<SPACE>
+" map ,a to start ack (or ag if found)
+nnoremap <Leader>a :Ack!<SPACE>--smart-case<SPACE>
 " map ,b to close current buffer
 nnoremap <Leader>b :bdelete<CR>
-" map ,k to launch NERDTree
-nnoremap <Leader>k :NERDTree<CR>
-" map ,K to close NERDTree
-nnoremap <Leader>K :NERDTreeClose<CR>
 " map ,n to toggle relative line numbering
 if exists('+relativenumber')
     nnoremap <Leader>n :set norelativenumber!<CR>
 endif
-" map ,P to paste from clipboard
-"set pastetoggle=<Leader>P
-" map ,p to toggle paste mode
-"nnoremap <Leader>p :set nopaste!<CR>
-" map ,s to run sort
-"nnoremap <Leader>s :sort<CR>
 " map ,t to call TrimWhiteSpace()
 nnoremap <Leader>t :call TrimWhiteSpace()<CR>
-" map ,u to write all buffers with changes
+" map ,bu to write all buffers with changes
 nnoremap <Leader>bu :bufdo update<CR>
 " map ,p* for CtrlP modes
 nnoremap <leader>pt :CtrlPTag<cr>
 nnoremap <leader>pb :CtrlPBuffer<cr>
 nnoremap <leader>pm :CtrlPMixed<cr>
 nnoremap <leader>ps :CtrlPMRU<cr>
-" map ,c to update ctags
-nnoremap <Leader>ct :!/usr/local/bin/ctags -R --languages=Python --exclude=.git .<CR>
-" map ,l to open/close the taglist
+" map ,ct to update ctags
+nnoremap <Leader>ct :!/usr/local/bin/ctags -R --exclude=.git .<CR>
+" map ,tl to open/close the taglist
 nnoremap <Leader>tl :TlistToggle<CR>
 " map ,u to toggle gundo
 nnoremap <Leader>u :GundoToggle<CR>
