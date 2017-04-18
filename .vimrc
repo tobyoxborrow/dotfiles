@@ -134,6 +134,9 @@ nnoremap <Leader>b :bdelete<CR>
 if exists('+relativenumber')
     nnoremap <Leader>n :set norelativenumber!<CR>
 endif
+" map ,s to turn on English spell check
+" motions: ]s, [s, actions: add: zg, suggest: z=
+nnoremap <Leader>s :setlocal spell spelllang=en_gb<CR>
 " map ,t to call TrimWhiteSpace()
 nnoremap <Leader>t :call TrimWhiteSpace()<CR>
 " map ,bu to write all buffers with changes
