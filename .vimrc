@@ -80,6 +80,8 @@ set wildignore+=*.DS_Store " OSX bullshit
 " actually, I don't like this, it is very annoying
 "set clipboard=unnamed
 
+set autowrite   " Save file when running :make (and :GoBuild)
+
 
 " Backups and file locations ---------------------------------------------
 
@@ -127,33 +129,39 @@ augroup END
 let mapleader = ','
 
 " map ,a to start ack (or ag if found)
-nnoremap <Leader>a :Ack!<SPACE>--smart-case<SPACE>
-" map ,b to close current buffer
-nnoremap <Leader>b :bdelete<CR>
+nnoremap <leader>a :Ack!<SPACE>--smart-case<SPACE>
 " map ,n to toggle relative line numbering
 if exists('+relativenumber')
-    nnoremap <Leader>n :set norelativenumber!<CR>
+    nnoremap <leader>n :set norelativenumber!<CR>
 endif
 " map ,s to turn on English spell check
 " motions: ]s, [s, actions: add: zg, suggest: z=
-nnoremap <Leader>s :setlocal spell spelllang=en_gb<CR>
+nnoremap <leader>s :setlocal spell spelllang=en_gb<CR>
 " map ,t to call TrimWhiteSpace()
-nnoremap <Leader>t :call TrimWhiteSpace()<CR>
-" map ,bu to write all buffers with changes
-nnoremap <Leader>bu :bufdo update<CR>
-" map ,p* for CtrlP modes
-nnoremap <leader>pt :CtrlPTag<cr>
-nnoremap <leader>pb :CtrlPBuffer<cr>
-nnoremap <leader>pm :CtrlPMixed<cr>
-nnoremap <leader>ps :CtrlPMRU<cr>
-" map ,ct to update ctags
-nnoremap <Leader>ct :!/usr/local/bin/ctags -R --exclude=.git .<CR>
-" map ,tl to open/close the taglist
-nnoremap <Leader>tl :TlistToggle<CR>
+nnoremap <leader>t :call TrimWhiteSpace()<CR>
 " map ,u to toggle gundo
-nnoremap <Leader>u :GundoToggle<CR>
+nnoremap <leader>u :GundoToggle<CR>
+" map ,bu to write all buffers with changes
+nnoremap <leader>bu :bufdo update<CR>
+" map ,ct to update ctags
+nnoremap <leader>ct :!/usr/local/bin/ctags -R --exclude=.git .<CR>
+" map ,gb to GoBuild; ,gr to GoRun; ,gi to GoInfo
+autocmd FileType go nmap <leader>gb <Plug>(go-build)
+autocmd FileType go nmap <leader>gr <Plug>(go-run)
+autocmd FileType go nmap <leader>gi <Plug>(go-info)
+" map ,b to kill current buffer
+nnoremap <leader>kb :bdelete<CR>
+" map ,q to kill quickfix windows
+nnoremap <leader>kq :cclose<CR>
+" map ,p* for CtrlP modes
+nnoremap <leader>pb :CtrlPBuffer<CR>
+nnoremap <leader>pm :CtrlPMixed<CR>
+nnoremap <leader>ps :CtrlPMRU<CR>
+nnoremap <leader>pt :CtrlPTag<CR>
+" map ,tl to open/close the taglist
+nnoremap <leader>tl :TlistToggle<CR>
 " map ,<space> to clear search highlighting
-noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
+noremap <silent> <leader><space> :noh<CR>:call clearmatches()<CR>
 
 " re-map visual-mode indenting to not lose the selection
 vnoremap < <gv
@@ -171,6 +179,10 @@ map <tab> %
 " keep search matches in the middle of the window
 nnoremap n nzzzv
 nnoremap N Nzzzv
+
+" map ctrl+n, ctrl+m to move next/previous in quickfix windows
+map <c-n> :cnext<CR>
+map <c-m> :cprevious<CR>
 
 
 " Plugins ----------------------------------------------------------------
@@ -225,6 +237,16 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     Plug 'https://github.com/vim-scripts/taglist.vim'
     " visualize your Vim undo tree
     Plug 'https://github.com/sjl/gundo.vim'
+    " dependency for vim-snipmate
+    Plug 'https://github.com/marcweber/vim-addon-mw-utils'
+    " dependency for vim-snipmate
+    Plug 'https://github.com/tomtom/tlib_vim'
+    " concise vim script that implements some of TextMate's snippets features
+    Plug 'https://github.com/garbas/vim-snipmate'
+    " snippets for vim-snipmate
+    Plug 'https://github.com/honza/vim-snippets'
+    " Go development plugin for Vim
+    Plug 'fatih/vim-go'
 
     call plug#end()
 
@@ -244,6 +266,10 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     " Syntastic
     " don't run syntastic on :wq which can cause an unnecessary delay
     let g:syntastic_check_on_wq = 0
+    " enable gometalinter for golang files
+    " go get -u github.com/alecthomas/gometalinter
+    " gometalinter --install
+    let g:syntastic_go_checkers = ['gometalinter']
 
     " CTRL+P
     " enable ctrl+p
@@ -281,6 +307,17 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     "
     "   - name: baz
     let g:ansible_options = {'ignore_blank_lines': 0}
+
+    " vim-go
+    let g:go_fmt_command = "goimports"
+    let g:go_addtags_transform = "camelcase"
+    let g:go_highlight_types = 1
+    let g:go_highlight_fields = 1
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+    " buggy? let g:go_auto_type_info = 1
+    " buggy? let g:go_auto_sameids = 1
 endif
 
 
@@ -319,3 +356,6 @@ if exists('+colorcolumn')
     set colorcolumn=80
     hi ColorColumn ctermbg=grey guibg=grey
 endif
+
+" enable nasm syntax highlighting for *.nasm files
+au BufRead,BufNewFile *.nasm set filetype=nasm
