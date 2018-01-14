@@ -1,0 +1,6 @@
+# golang
+if [[ -f "/usr/local/bin/go" ]]; then
+    export GOPATH=$HOME/Projects/gocode/
+    export PATH=$PATH:/usr/local/opt/go/libexec/bin
+    export PATH=$PATH:$GOPATH/bin/
+fi
