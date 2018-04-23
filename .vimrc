@@ -130,38 +130,39 @@ let mapleader = ','
 
 " map ,a to start ack (or ag if found)
 nnoremap <leader>a :Ack!<SPACE>--smart-case<SPACE>
-" map ,n to toggle relative line numbering
-if exists('+relativenumber')
-    nnoremap <leader>n :set norelativenumber!<CR>
-endif
 " map ,s to turn on English spell check
 " motions: ]s, [s, actions: add: zg, suggest: z=
 nnoremap <leader>s :setlocal spell spelllang=en_gb<CR>
 " map ,t to call TrimWhiteSpace()
 nnoremap <leader>t :call TrimWhiteSpace()<CR>
-" map ,u to toggle gundo
-nnoremap <leader>u :GundoToggle<CR>
 " map ,bu to write all buffers with changes
 nnoremap <leader>bu :bufdo update<CR>
-" map ,ct to update ctags
-nnoremap <leader>ct :!/usr/local/bin/ctags -R --exclude=.git .<CR>
 " map ,gb to GoBuild; ,gr to GoRun; ,gi to GoInfo
 autocmd FileType go nmap <leader>gb <Plug>(go-build)
 autocmd FileType go nmap <leader>gr <Plug>(go-run)
 autocmd FileType go nmap <leader>gi <Plug>(go-info)
-" map ,b to kill current buffer
+" maps to kill current buffer, quickfix, location and preview windows
 nnoremap <leader>kb :bdelete<CR>
-" map ,q to kill quickfix windows
 nnoremap <leader>kq :cclose<CR>
+nnoremap <leader>kl :lclose<CR>
+nnoremap <leader>kp :pclose<CR>
 " map ,p* for CtrlP modes
 nnoremap <leader>pb :CtrlPBuffer<CR>
 nnoremap <leader>pm :CtrlPMixed<CR>
 nnoremap <leader>ps :CtrlPMRU<CR>
 nnoremap <leader>pt :CtrlPTag<CR>
-" map ,tl to open/close the taglist
-nnoremap <leader>tl :TlistToggle<CR>
-" map ,<space> to clear search highlighting
-noremap <silent> <leader><space> :noh<CR>:call clearmatches()<CR>
+
+" Previously used maps
+"" map ,<space> to clear search highlighting
+"noremap <silent> <leader><space> :noh<CR>:call clearmatches()<CR>
+"" map ,ct to update ctags
+"nnoremap <leader>ct :!/usr/local/bin/ctags -R --exclude=.git .<CR>
+"" map ,tl to open/close the taglist
+"nnoremap <leader>tl :TlistToggle<CR>
+"" map ,n to toggle relative line numbering
+"if exists('+relativenumber')
+"    nnoremap <leader>n :set norelativenumber!<CR>
+"endif
 
 " re-map visual-mode indenting to not lose the selection
 vnoremap < <gv
@@ -196,12 +197,8 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
 
     " Fuzzy file, buffer, mru, tag, etc finder.
     Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-    " Puppet niceties for your Vim setup
-    "Plug 'https://github.com/rodjek/vim-puppet'
     " Syntax checking hacks for vim
     Plug 'https://github.com/scrooloose/syntastic'
-    " Vim script for text filtering and alignment
-    "Plug 'https://github.com/godlygeek/tabular'
     " lean & mean status/tabline for vim that's light as air
     Plug 'https://github.com/bling/vim-airline'
     " theme repository for vim-airline
@@ -232,21 +229,29 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     Plug 'https://github.com/airblade/vim-gitgutter'
     " Add additional support for Ansible in VIM
     Plug 'https://github.com/chase/vim-ansible-yaml'
-    " Source code browser (supports C/C++, java, perl, python, tcl, sql, php,
-    " etc)
-    Plug 'https://github.com/vim-scripts/taglist.vim'
-    " visualize your Vim undo tree
-    Plug 'https://github.com/sjl/gundo.vim'
-    " dependency for vim-snipmate
-    Plug 'https://github.com/marcweber/vim-addon-mw-utils'
-    " dependency for vim-snipmate
-    Plug 'https://github.com/tomtom/tlib_vim'
-    " concise vim script that implements some of TextMate's snippets features
-    Plug 'https://github.com/garbas/vim-snipmate'
-    " snippets for vim-snipmate
-    Plug 'https://github.com/honza/vim-snippets'
     " Go development plugin for Vim
     Plug 'fatih/vim-go'
+    " True Sublime Text style multiple selections for Vim
+    Plug 'https://github.com/terryma/vim-multiple-cursors'
+
+    " Some plugins I no longer use...
+    " Vim script for text filtering and alignment
+    " Plug 'https://github.com/godlygeek/tabular'
+    " Puppet niceties for your Vim setup
+    " Plug 'https://github.com/rodjek/vim-puppet'
+    " Source code browser (supports C/C++, java, perl, python, tcl, sql, php,
+    " etc)
+    " Plug 'https://github.com/vim-scripts/taglist.vim'
+    " visualize your Vim undo tree
+    " Plug 'https://github.com/sjl/gundo.vim'
+    " dependency for vim-snipmate
+    " Plug 'https://github.com/marcweber/vim-addon-mw-utils'
+    " dependency for vim-snipmate
+    " Plug 'https://github.com/tomtom/tlib_vim'
+    " concise vim script that implements some of TextMate's snippets features
+    " Plug 'https://github.com/garbas/vim-snipmate'
+    " snippets for vim-snipmate
+    " Plug 'https://github.com/honza/vim-snippets'
 
     call plug#end()
 
@@ -300,8 +305,8 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
     autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-    " vim-ansible-yaml do not auto-indent after a blank line
-    " to stop crazy stuff like:
+    " vim-ansible-yaml
+    " do not auto-indent after a blank line to stop crazy stuff like:
     " - name: foo
     "   debug: msg="{{bar}}"
     "
