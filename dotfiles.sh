@@ -32,8 +32,7 @@ dotfiles=(
     .screenrc
     .tmux.conf
     .tmux.conf.local
-    .tmux.conf.solarized
-    .tmux.conf.zenburn
+    .tmux.conf.theme
     .vimrc
     .wgetrc
     )
