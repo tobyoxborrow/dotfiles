@@ -233,6 +233,8 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     Plug 'fatih/vim-go'
     " True Sublime Text style multiple selections for Vim
     Plug 'https://github.com/terryma/vim-multiple-cursors'
+    " Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box.
+    Plug 'https://github.com/python-mode/python-mode'
 
     " Some plugins I no longer use...
     " Vim script for text filtering and alignment
@@ -256,6 +258,32 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     call plug#end()
 
     " Plugin Configuration
+
+    " python-mode
+    " enable Python 3 syntax
+    let g:pymode_python = 'python3'
+    " disable folding
+    let g:pymode_folding = 0
+    " disable linting (using syntastic)
+    let g:pymode_lint = 0
+    let g:pymode_lint_on_write = 0
+    " disable setting extra vim options
+    let g:pymode_options = 0
+
+    " Multiple Cursors
+    " change default mapping as we use this for quickfix movement
+    let g:multi_cursor_start_word_key      = '<leader>m'
+    " prevent neocomplete conflict with multiple cursors
+    function! Multiple_cursors_before()
+    if exists(':NeoCompleteLock')==2
+        exe 'NeoCompleteLock'
+    endif
+    endfunction
+    function! Multiple_cursors_after()
+    if exists(':NeoCompleteUnlock')==2
+        exe 'NeoCompleteUnlock'
+    endif
+    endfunction
 
     " Airline
     " don't use fancy symbols in airline
