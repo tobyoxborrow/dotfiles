@@ -221,9 +221,16 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     Plug 'https://github.com/mileszs/ack.vim'
     " Vim motions on speed!
     Plug 'https://github.com/Lokaltog/vim-easymotion'
-    " Next generation completion framework after neocomplcache
-    " Requires lua - brew install vim --with-lua
-    Plug 'https://github.com/Shougo/neocomplete.vim'
+    " Dark powered asynchronous completion framework for neovim/Vim8
+    " Requires python3 - :echo has('python3'), :echo exepath('python3')
+    " Requires neovim python3 client in the python3 compiled with vim
+    "  vim is compiled with python3 from brew, installed package with:
+    "  /usr/local/opt/python/libexec/bin/pip install neovim
+    " Requires nvim-yarp and vim-hug-neovim-rpc
+    Plug 'https://github.com/Shougo/deoplete.nvim'
+    Plug 'https://github.com/roxma/nvim-yarp'
+    Plug 'https://github.com/roxma/vim-hug-neovim-rpc'
+    Plug 'https://github.com/zchee/deoplete-jedi'
     " A Vim plugin which shows a git diff in the gutter (sign column) and
     " stages/reverts hunks
     Plug 'https://github.com/airblade/vim-gitgutter'
@@ -232,7 +239,7 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     " Go development plugin for Vim
     Plug 'fatih/vim-go'
     " True Sublime Text style multiple selections for Vim
-    Plug 'https://github.com/terryma/vim-multiple-cursors'
+    " Plug 'https://github.com/terryma/vim-multiple-cursors'
     " Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box.
     Plug 'https://github.com/python-mode/python-mode'
 
@@ -254,6 +261,8 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     " Plug 'https://github.com/garbas/vim-snipmate'
     " snippets for vim-snipmate
     " Plug 'https://github.com/honza/vim-snippets'
+    " Using the jedi autocompletion library for VIM
+    " Plug 'https://github.com/davidhalter/jedi-vim'
 
     call plug#end()
 
@@ -269,21 +278,28 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     let g:pymode_lint_on_write = 0
     " disable setting extra vim options
     let g:pymode_options = 0
+    " disable autocompletion (using deoplete+jedi)
+    let g:pymode_rope_completion = 0
+    let g:pymode_rope_complete_on_dot = 0
+
+    " jedi-vim
+    " disable autocompletion on dot (annoying)
+    "let g:jedi#popup_on_dot = 0
 
     " Multiple Cursors
     " change default mapping as we use this for quickfix movement
-    let g:multi_cursor_start_word_key      = '<leader>m'
-    " prevent neocomplete conflict with multiple cursors
-    function! Multiple_cursors_before()
-    if exists(':NeoCompleteLock')==2
-        exe 'NeoCompleteLock'
-    endif
-    endfunction
-    function! Multiple_cursors_after()
-    if exists(':NeoCompleteUnlock')==2
-        exe 'NeoCompleteUnlock'
-    endif
-    endfunction
+    " let g:multi_cursor_start_word_key      = '<leader>m'
+    " " prevent neocomplete conflict with multiple cursors
+    " function! Multiple_cursors_before()
+    " if exists(':NeoCompleteLock')==2
+    "     exe 'NeoCompleteLock'
+    " endif
+    " endfunction
+    " function! Multiple_cursors_after()
+    " if exists(':NeoCompleteUnlock')==2
+    "     exe 'NeoCompleteUnlock'
+    " endif
+    " endfunction
 
     " Airline
     " don't use fancy symbols in airline
@@ -321,17 +337,20 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
 
     " neocomplete
     " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplete#enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-    " automatically close tip window after selection is made
-    autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+    " let g:acp_enableAtStartup = 0
+    " " Use neocomplete.
+    " let g:neocomplete#enable_at_startup = 1
+    " " Use smartcase.
+    " let g:neocomplete#enable_smart_case = 1
+    " " Set minimum syntax keyword length.
+    " let g:neocomplete#sources#syntax#min_keyword_length = 3
+    " let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+    " " automatically close tip window after selection is made
+    " autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+    " autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+    " Deoplete
+    let g:deoplete#enable_at_startup = 1
 
     " vim-ansible-yaml
     " do not auto-indent after a blank line to stop crazy stuff like:
