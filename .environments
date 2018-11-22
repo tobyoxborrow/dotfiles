@@ -1,8 +1,9 @@
 #!/bin/bash
 # Set up various environments
 
-source ~/.environments.homebrew
-source ~/.environments.pyenv
-source ~/.environments.perlbrew
+source ~/.environments.bat
 source ~/.environments.golang
+source ~/.environments.homebrew
+source ~/.environments.perlbrew
+source ~/.environments.pyenv
 source ~/.environments.rvm
