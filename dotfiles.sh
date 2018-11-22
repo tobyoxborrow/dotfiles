@@ -16,6 +16,7 @@ dotfiles=(
     .bashrc
     .curlrc
     .environments
+    .environments.bat
     .environments.golang
     .environments.homebrew
     .environments.perlbrew
