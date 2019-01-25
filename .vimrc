@@ -228,68 +228,32 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     Plug 'https://github.com/chase/vim-ansible-yaml'
     " Go development plugin for Vim
     Plug 'fatih/vim-go'
-    " True Sublime Text style multiple selections for Vim
-    " Plug 'https://github.com/terryma/vim-multiple-cursors'
-    " Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box.
-    Plug 'https://github.com/python-mode/python-mode'
+    " YouCompleteMe - A code-completion engine for Vim
+    " Requires cmake: `brew install cmake`
+    " Requires dynamic python binary. For pyenv do:
+    " env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.6.3
+    " You must manually run install.py after installing with vim-plug
+    " cd ~/.vim/plugged/YouCompleteMe/
+    " ./install.py
+    Plug 'https://github.com/Valloric/YouCompleteMe'
+    " Vim configuration for Rust
+    Plug 'rust-lang/rust.vim'
 
-    " Some plugins I no longer use...
-    " Vim script for text filtering and alignment
-    " Plug 'https://github.com/godlygeek/tabular'
-    " Puppet niceties for your Vim setup
-    " Plug 'https://github.com/rodjek/vim-puppet'
-    " Source code browser (supports C/C++, java, perl, python, tcl, sql, php,
-    " etc)
-    " Plug 'https://github.com/vim-scripts/taglist.vim'
-    " visualize your Vim undo tree
-    " Plug 'https://github.com/sjl/gundo.vim'
-    " dependency for vim-snipmate
-    " Plug 'https://github.com/marcweber/vim-addon-mw-utils'
-    " dependency for vim-snipmate
-    " Plug 'https://github.com/tomtom/tlib_vim'
-    " concise vim script that implements some of TextMate's snippets features
-    " Plug 'https://github.com/garbas/vim-snipmate'
-    " snippets for vim-snipmate
-    " Plug 'https://github.com/honza/vim-snippets'
-    " Using the jedi autocompletion library for VIM
-    " Plug 'https://github.com/davidhalter/jedi-vim'
+    " YouCompleteMe
+    let g:ycm_server_keep_logfiles = 1
+    let g:ycm_server_log_level = 'debug'
+
+    " rust.vim
+    " disable rust specific text width of 99, use value in vim instead
+    let g:rust_recommended_style = 0
 
     call plug#end()
 
     " Plugin Configuration
 
-    " python-mode
-    " enable Python 3 syntax
-    let g:pymode_python = 'python3'
-    " disable folding
-    let g:pymode_folding = 0
-    " disable linting (using syntastic)
-    let g:pymode_lint = 0
-    let g:pymode_lint_on_write = 0
-    " disable setting extra vim options
-    let g:pymode_options = 0
-    " disable autocompletion (using deoplete+jedi)
-    let g:pymode_rope_completion = 0
-    let g:pymode_rope_complete_on_dot = 0
-
     " jedi-vim
     " disable autocompletion on dot (annoying)
-    "let g:jedi#popup_on_dot = 0
-
-    " Multiple Cursors
-    " change default mapping as we use this for quickfix movement
-    " let g:multi_cursor_start_word_key      = '<leader>m'
-    " " prevent neocomplete conflict with multiple cursors
-    " function! Multiple_cursors_before()
-    " if exists(':NeoCompleteLock')==2
-    "     exe 'NeoCompleteLock'
-    " endif
-    " endfunction
-    " function! Multiple_cursors_after()
-    " if exists(':NeoCompleteUnlock')==2
-    "     exe 'NeoCompleteUnlock'
-    " endif
-    " endfunction
+    let g:jedi#popup_on_dot = 0
 
     " Airline
     " don't use fancy symbols in airline
@@ -324,23 +288,6 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
         let g:ctrlp_user_command = 'ag %s --files-with-matches --nocolor -g ""'
         let g:ackprg = 'ag --vimgrep'
     endif
-
-    " neocomplete
-    " Disable AutoComplPop.
-    " let g:acp_enableAtStartup = 0
-    " " Use neocomplete.
-    " let g:neocomplete#enable_at_startup = 1
-    " " Use smartcase.
-    " let g:neocomplete#enable_smart_case = 1
-    " " Set minimum syntax keyword length.
-    " let g:neocomplete#sources#syntax#min_keyword_length = 3
-    " let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-    " " automatically close tip window after selection is made
-    " autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-    " autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-    " Deoplete
-    let g:deoplete#enable_at_startup = 1
 
     " vim-ansible-yaml
     " do not auto-indent after a blank line to stop crazy stuff like:
