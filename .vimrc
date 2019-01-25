@@ -221,16 +221,6 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     Plug 'https://github.com/mileszs/ack.vim'
     " Vim motions on speed!
     Plug 'https://github.com/Lokaltog/vim-easymotion'
-    " Dark powered asynchronous completion framework for neovim/Vim8
-    " Requires python3 - :echo has('python3'), :echo exepath('python3')
-    " Requires neovim python3 client in the python3 compiled with vim
-    "  vim is compiled with python3 from brew, installed package with:
-    "  /usr/local/opt/python/libexec/bin/pip install neovim
-    " Requires nvim-yarp and vim-hug-neovim-rpc
-    Plug 'https://github.com/Shougo/deoplete.nvim'
-    Plug 'https://github.com/roxma/nvim-yarp'
-    Plug 'https://github.com/roxma/vim-hug-neovim-rpc'
-    Plug 'https://github.com/zchee/deoplete-jedi'
     " A Vim plugin which shows a git diff in the gutter (sign column) and
     " stages/reverts hunks
     Plug 'https://github.com/airblade/vim-gitgutter'
