@@ -22,6 +22,7 @@ dotfiles=(
     .environments.perlbrew
     .environments.pyenv
     .environments.rvm
+    .environments.rust
     .exports
     .functions
     .gitconfig
