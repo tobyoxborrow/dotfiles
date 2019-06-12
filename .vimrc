@@ -58,7 +58,8 @@ set visualbell
 set hidden         " Hide modified buffers when they are abandoned
 set scrolloff=3    " Keep 3 context lines above and below the cursor
 set history=10000  " The number of command-lines that are remembered
-set modelines=3    " The number of lines that is checked for set commands
+set nomodeline     " Do not use modelines, common security risk
+"set modelines=3    " The number of lines that is checked for set commands
 set nonumber       " Do not display line numbers
 
 if exists('+relativenumber')
