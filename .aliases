@@ -25,7 +25,7 @@ alias grep="grep --color=auto"
 alias sudo='sudo '
 
 # Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; brew update --all; brew upgrade; brew cleanup; sudo gem update --system; sudo gem update; vim +PlugUpdate; if [[ -d ~/.vim/plugged/YouCompleteMe ]]; then python ~/.vim/plugged/YouCompleteMe/install.py; fi'
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; pip install --upgrade pip; sudo gem update --system; sudo gem update; vim +PlugUpdate; if [[ -d ~/.vim/plugged/YouCompleteMe ]]; then python ~/.vim/plugged/YouCompleteMe/install.py; fi'
 # Every damn time
 alias upgrade="sl -al; echo Try 'update'"
 
