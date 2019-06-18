@@ -13,6 +13,19 @@ if [[ -d /usr/local/sbin/ ]]; then
     export PATH="/usr/local/sbin:${PATH}"
 fi
 
+# Use homebrew bash completion
+HOMEBREW_PREFIX=$(brew --prefix)
+if type brew &>/dev/null; then
+    for COMPLETION in "$HOMEBREW_PREFIX"/etc/bash_completion.d/*
+    do
+        [[ -f $COMPLETION ]] && source "$COMPLETION"
+    done
+    if [[ -f ${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh ]];
+    then
+        source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+    fi
+fi
+
 # Prefer sqlite from the homebrew keg-only path if available
 # Note: Android SDK includes an older sqlite without readline, do not want
 # MacOS also has an older sqlite we don't want either
