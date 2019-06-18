@@ -1,0 +1,5 @@
+# pipenv - Python dependancy manager
+if [[ -d "${HOME}/Library/Python/3.6/bin" ]]; then
+    export PATH="${HOME}/Library/Python/3.6/bin:${PATH}"
+fi
+

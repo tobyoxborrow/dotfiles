@@ -20,9 +20,10 @@ dotfiles=(
     .environments.golang
     .environments.homebrew
     .environments.perlbrew
+    .environments.pipenv
     .environments.pyenv
-    .environments.rvm
     .environments.rust
+    .environments.rvm
     .exports
     .functions
     .gitconfig

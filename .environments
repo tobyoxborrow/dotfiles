@@ -5,6 +5,7 @@ source ~/.environments.bat
 source ~/.environments.golang
 source ~/.environments.homebrew
 source ~/.environments.perlbrew
+source ~/.environments.pipenv
 source ~/.environments.pyenv
 source ~/.environments.rvm
 source ~/.environments.rust
