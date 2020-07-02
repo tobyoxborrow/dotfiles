@@ -129,8 +129,8 @@ augroup END
 " Use comma as leader
 let mapleader = ','
 
-" map ,a to start ack (or ag if found)
-nnoremap <leader>a :Ack!<SPACE>--smart-case<SPACE>
+" map ,r to start the vim-ripgrep plugin
+nnoremap <leader>r :Rg<SPACE>
 " map ,s to turn on English spell check
 " motions: ]s, [s, actions: add: zg, suggest: z=
 nnoremap <leader>s :setlocal spell spelllang=en_gb<CR>
@@ -191,45 +191,99 @@ map <c-m> :cprevious<CR>
 " Plugins ----------------------------------------------------------------
 
 " Use vim-plug for plugins
-" https://github.com/junegunn/vim-plug
+" Installation instructions, see https://github.com/junegunn/vim-plug
+" Or run:
+" ~ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " Fresh install: plugins need to be installed with ":PlugInstall"
 if filereadable(glob('~/.vim/autoload/plug.vim'))
     " Plugin list
     call plug#begin('~/.vim/plugged')
 
-    " Fuzzy file, buffer, mru, tag, etc finder.
-    Plug 'https://github.com/ctrlpvim/ctrlp.vim'
-    " Syntax checking hacks for vim
-    Plug 'https://github.com/scrooloose/syntastic'
-    " lean & mean status/tabline for vim that's light as air
-    Plug 'https://github.com/bling/vim-airline'
-    " theme repository for vim-airline
-    Plug 'https://github.com/vim-airline/vim-airline-themes'
-    " one colorscheme pack to rule them all!
-    Plug 'https://github.com/flazz/vim-colorschemes'
-    " fugitive.vim: a Git wrapper so awesome, it should be illegal
-    Plug 'https://github.com/tpope/vim-fugitive'
     " sensible.vim: Defaults everyone can agree on
     Plug 'https://github.com/tpope/vim-sensible'
-    " Plugin for transparent editing of gpg encrypted files.
-    Plug 'https://github.com/vim-scripts/gnupg.vim'
-    " helpers for UNIX
-    Plug 'https://github.com/tpope/vim-eunuch'
-    " pairs of handy bracket mappings
-    Plug 'https://github.com/tpope/vim-unimpaired'
+
     " Essential Stupid
     Plug 'https://github.com/koron/nyancat-vim'
-    "  Vim plugin for the Perl module / CLI script 'ack'
-    Plug 'https://github.com/mileszs/ack.vim'
-    " Vim motions on speed!
-    Plug 'https://github.com/Lokaltog/vim-easymotion'
+
+    " lean & mean status/tabline for vim that's light as air
+    " :help vim-airline
+    Plug 'https://github.com/bling/vim-airline'
+
+    " theme repository for vim-airline
+    Plug 'https://github.com/vim-airline/vim-airline-themes'
+
+    " one colorscheme pack to rule them all!
+    Plug 'https://github.com/flazz/vim-colorschemes'
+
     " A Vim plugin which shows a git diff in the gutter (sign column) and
     " stages/reverts hunks
+    " :help gitgutter
     Plug 'https://github.com/airblade/vim-gitgutter'
+
+    " Plugin for transparent editing of gpg encrypted files.
+    Plug 'https://github.com/vim-scripts/gnupg.vim'
+
+    " helpers for UNIX
+    Plug 'https://github.com/tpope/vim-eunuch'
+
+    " fugitive.vim: a Git wrapper so awesome, it should be illegal
+    " :help fugitive
+    " Examples: :Gwrite, :Gblame, :Gcommit
+    Plug 'https://github.com/tpope/vim-fugitive'
+
+    " Vim motions on speed!
+    " :help easymotion
+    " Examples: ,,w (jump to start of word) ,,W (start of WORD)
+    "           ,,e (end of word) ,,E (end of WORD)
+    "           ,,fo (find letter o) ,,Fo (backwards)
+    "           ,,j (line downward) ,,k (line upward)
+    "           ,,n (next "/" or "?" match forward) ,,N (backward)
+    Plug 'https://github.com/Lokaltog/vim-easymotion'
+
+    " pairs of handy bracket mappings
+    " :help unimpaired
+    " Examples: [f (previous file in directory), ]f (next file)
+    "           [<space> (add blank lines before), ]<space> (after)
+    "           [e (exchange line, i.e. move up) ]e (move down)
+    "           [b (previous buffer), ]b (next), [B (first)
+    "           [q (previous quickfix), ]q (next), [Q (first), ]Q (last)
+    "           [l (previous locationlist), ]l (next), [L (first), ]L (last)
+    Plug 'https://github.com/tpope/vim-unimpaired'
+
+    " Fuzzy file, buffer, mru, tag, etc finder.
+    " :help ctrlp
+    " Maps: ,pb (find buffer) ,pm (find in MRU) ,pf (find file in cwd)
+    Plug 'https://github.com/ctrlpvim/ctrlp.vim'
+
+    " Use RipGrep in Vim and display results in a quickfix list
+    " Examples: :Rg <string|pattern>
+    " Builtin: :cc (jump to err), :cr (first item), :cn (next), :cp (prev)
+    " Unimpaired: [q (previous quickfix), ]q (next), [Q (first), ]Q (last)
+    " Maps: ,r (`:Rg `) ,kq (kill quickfix window)
+    Plug 'https://github.com/jremmen/vim-ripgrep'
+
     " Add additional support for Ansible in VIM
+    " :help ansible
     Plug 'https://github.com/chase/vim-ansible-yaml'
+
     " Go development plugin for Vim
+    " :help vim-go
+    " Examples: :go-build, :go-run, :go-info
+    " Maps: ,gb (:go-build); ,gr (:go-run); ,gi (go-info)
     Plug 'fatih/vim-go'
+
+    " Vim configuration for Rust
+    Plug 'rust-lang/rust.vim'
+
+    " Syntax checking hacks for vim
+    " :help syntastic
+    " Errors will appear in vim's location list.
+    " Builtin: :Errors, :lopen, :lclose, :ll (jump to loc), :lnext, :lprev
+    " Unimpaired: [l (previous list item), ]l (next), [L (first), ]L (last)
+    " Maps: ,kl (kill location list window)
+    Plug 'https://github.com/scrooloose/syntastic'
+
     " YouCompleteMe - A code-completion engine for Vim
     " Requires cmake: `brew install cmake`
     " Requires dynamic python binary. For pyenv do:
@@ -238,24 +292,10 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     " cd ~/.vim/plugged/YouCompleteMe/
     " ./install.py
     Plug 'https://github.com/Valloric/YouCompleteMe'
-    " Vim configuration for Rust
-    Plug 'rust-lang/rust.vim'
-
-    " YouCompleteMe
-    let g:ycm_server_keep_logfiles = 1
-    let g:ycm_server_log_level = 'debug'
-
-    " rust.vim
-    " disable rust specific text width of 99, use value in vim instead
-    let g:rust_recommended_style = 0
 
     call plug#end()
 
     " Plugin Configuration
-
-    " jedi-vim
-    " disable autocompletion on dot (annoying)
-    let g:jedi#popup_on_dot = 0
 
     " Airline
     " don't use fancy symbols in airline
@@ -268,14 +308,6 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     " display buffers
     let g:airline#extensions#tabline#enabled = 1
 
-    " Syntastic
-    " don't run syntastic on :wq which can cause an unnecessary delay
-    let g:syntastic_check_on_wq = 0
-    " enable gometalinter for golang files
-    " go get -u github.com/alecthomas/gometalinter
-    " gometalinter --install
-    let g:syntastic_go_checkers = ['gometalinter']
-
     " CTRL+P
     " enable ctrl+p
     set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -284,11 +316,12 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     " version control. It also supports works with .svn, .hg, .bzr.
     let g:ctrlp_working_path_mode = 'r'
 
-    " if the ag executable is found, we can make use of that instead of some
-    " command defaults
-    if executable('ag')
-        let g:ctrlp_user_command = 'ag %s --files-with-matches --nocolor -g ""'
-        let g:ackprg = 'ag --vimgrep'
+    " if the ripgrep executable is found, we can make use of that instead of
+    " some command defaults
+    if executable('rg')
+        " ctrlp plugin
+        let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+        let g:ctrlp_use_caching = 0
     endif
 
     " vim-ansible-yaml
@@ -309,6 +342,32 @@ if filereadable(glob('~/.vim/autoload/plug.vim'))
     let g:go_metalinter_autosave_enabled = ['vet', 'golint']
     " buggy? let g:go_auto_type_info = 1
     " buggy? let g:go_auto_sameids = 1
+
+    " rust.vim
+    " disable rust specific text width of 99, use value in vim instead
+    let g:rust_recommended_style = 0
+
+    " jedi-vim
+    " disable autocompletion on dot (annoying)
+    let g:jedi#popup_on_dot = 0
+
+    " Syntastic
+    " don't run syntastic on :wq which can cause an unnecessary delay
+    let g:syntastic_check_on_wq = 0
+    " enable gometalinter for golang files
+    " go get -u github.com/alecthomas/gometalinter
+    " gometalinter --install
+    " let g:syntastic_go_checkers = ['gometalinter']
+    " don't test the exit status, it seems broken with pylint 202002
+    " syntastic would complain 'abnormal exit status' and show pylint output,
+    " interrupting the editing workflow
+    let g:syntastic_exit_checks = 0
+    " Always populate vim's locationlist with errors
+    let g:syntastic_always_populate_loc_list = 1
+
+    " YouCompleteMe
+    " let g:ycm_server_keep_logfiles = 1
+    " let g:ycm_server_log_level = 'debug'
 endif
 
 
