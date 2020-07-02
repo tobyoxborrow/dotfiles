@@ -24,10 +24,28 @@ alias grep="grep --color=auto"
 # Enable aliases to be sudo’ed
 alias sudo='sudo '
 
-# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
-alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; pip install --upgrade pip; sudo gem update --system; sudo gem update; vim +PlugUpdate; if [[ -d ~/.vim/plugged/YouCompleteMe ]]; then python ~/.vim/plugged/YouCompleteMe/install.py; fi'
-# Every damn time
-alias upgrade="sl -al; echo Try 'update'"
+# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and
+# their installed packages
+BREWALIAS=""
+if [[ -d /usr/local/bin/ ]]; then
+    BREWALIAS="brew update; brew upgrade; brew cleanup; "
+fi
+RVMALIAS=""
+if [[ -f "${HOME}/.rvm/scripts/rvm" ]]; then
+    RVMALIAS="sudo gem update --system; sudo gem update --no-suggestions --no-document; "
+fi
+PYENVALIAS1=""
+PYENVALIAS2=""
+if [[ -d "${HOME}/.pyenv/" ]]; then
+    PYENVVER="3.8.2"   # version of python expected to be used by vim (and YouCompleteMe)
+    PYENVALIAS1="pyenv shell $PYENVVER; pip install --upgrade pip; "
+    PYENVALIAS2="pyenv shell -; "
+fi
+VIMPLUGALIAS=""
+if [[ -d "${HOME}/.vim/plugged/" ]]; then
+    VIMPLUGALIAS="vim +PlugUpdate; if [[ -d ~/.vim/plugged/YouCompleteMe ]]; then python ~/.vim/plugged/YouCompleteMe/install.py; fi; "
+fi
+alias update="sudo softwareupdate -i -a; $BREWALIAS $PYENVALIAS1 $VIMPLUGALIAS $PYENVALIAS2"
 
 # OS X has no `md5sum`, so use `md5` as a fallback
 command -v md5sum > /dev/null || alias md5sum="md5"

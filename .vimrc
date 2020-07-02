@@ -129,24 +129,20 @@ augroup END
 " Use comma as leader
 let mapleader = ','
 
-" map ,r to start the vim-ripgrep plugin
-nnoremap <leader>r :Rg<SPACE>
-" map ,s to turn on English spell check
-" motions: ]s, [s, actions: add: zg, suggest: z=
-nnoremap <leader>s :setlocal spell spelllang=en_gb<CR>
-" map ,t to call TrimWhiteSpace()
-nnoremap <leader>t :call TrimWhiteSpace()<CR>
 " map ,bu to write all buffers with changes
 nnoremap <leader>bu :bufdo update<CR>
+
 " map ,gb to GoBuild; ,gr to GoRun; ,gi to GoInfo
 autocmd FileType go nmap <leader>gb <Plug>(go-build)
 autocmd FileType go nmap <leader>gr <Plug>(go-run)
 autocmd FileType go nmap <leader>gi <Plug>(go-info)
+
 " maps to kill current buffer, quickfix, location and preview windows
 nnoremap <leader>kb :bdelete<CR>
 nnoremap <leader>kq :cclose<CR>
 nnoremap <leader>kl :lclose<CR>
 nnoremap <leader>kp :pclose<CR>
+
 " map ,p* for CtrlP modes
 nnoremap <leader>pb :CtrlPBuffer<CR>
 " nnoremap <leader>pm :CtrlPMixed<CR>
@@ -154,17 +150,16 @@ nnoremap <leader>pm :CtrlPMRU<CR>
 " nnoremap <leader>pt :CtrlPTag<CR>
 nnoremap <leader>pf :CtrlPCurWD<CR>
 
-" Previously used maps
-"" map ,<space> to clear search highlighting
-"noremap <silent> <leader><space> :noh<CR>:call clearmatches()<CR>
-"" map ,ct to update ctags
-"nnoremap <leader>ct :!/usr/local/bin/ctags -R --exclude=.git .<CR>
-"" map ,tl to open/close the taglist
-"nnoremap <leader>tl :TlistToggle<CR>
-"" map ,n to toggle relative line numbering
-"if exists('+relativenumber')
-"    nnoremap <leader>n :set norelativenumber!<CR>
-"endif
+" map ,r to start the vim-ripgrep plugin
+nnoremap <leader>r :Rg<SPACE>
+
+" map ,s to turn on English spell check
+" :help spell
+" Builtin: ]s (next misspelling), [s (prev), z= (suggest), zg (add)
+nnoremap <leader>s :setlocal spell spelllang=en_gb<CR>
+
+" map ,t to call TrimWhiteSpace()
+nnoremap <leader>t :call TrimWhiteSpace()<CR>
 
 " re-map visual-mode indenting to not lose the selection
 vnoremap < <gv
@@ -182,10 +177,6 @@ map <tab> %
 " keep search matches in the middle of the window
 nnoremap n nzzzv
 nnoremap N Nzzzv
-
-" map ctrl+n, ctrl+m to move next/previous in quickfix windows
-map <c-n> :cnext<CR>
-map <c-m> :cprevious<CR>
 
 
 " Plugins ----------------------------------------------------------------
