@@ -185,3 +185,5 @@
 [user]
 	name = Toby Oxborrow
 	email = tobyox@cisco.com
+[commit]
+	template = ~/.stCommitMsg
