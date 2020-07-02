@@ -149,9 +149,10 @@ nnoremap <leader>kl :lclose<CR>
 nnoremap <leader>kp :pclose<CR>
 " map ,p* for CtrlP modes
 nnoremap <leader>pb :CtrlPBuffer<CR>
-nnoremap <leader>pm :CtrlPMixed<CR>
-nnoremap <leader>ps :CtrlPMRU<CR>
-nnoremap <leader>pt :CtrlPTag<CR>
+" nnoremap <leader>pm :CtrlPMixed<CR>
+nnoremap <leader>pm :CtrlPMRU<CR>
+" nnoremap <leader>pt :CtrlPTag<CR>
+nnoremap <leader>pf :CtrlPCurWD<CR>
 
 " Previously used maps
 "" map ,<space> to clear search highlighting
