@@ -1,35 +1,39 @@
 # Homebrew
 
-HOMEBREW_PREFIX=$(brew --prefix)
+if which brew &>/dev/null; then
 
-# Prefer homebrew binaries over any locally installed ones
-if [[ -d "${HOMEBREW_PREFIX}/bin/" ]]; then
-    export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
-    # gnubin contains gnu versions of many core utils, such as: cat, ls, sort
-    if [[ -d "${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin" ]]; then
-        export PATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:${PATH}"
+    BREW_PREFIX=$(brew --prefix)
+
+    # Prefer homebrew binaries over any locally installed ones
+    if [[ -d "${BREW_PREFIX}/bin/" ]]; then
+        export PATH="${BREW_PREFIX}/bin:${PATH}"
+        # gnubin contains gnu versions of many core utils like: cat, ls, sort
+        if [[ -d "${BREW_PREFIX}/opt/coreutils/libexec/gnubin" ]]; then
+            export PATH="${BREW_PREFIX}/opt/coreutils/libexec/gnubin:${PATH}"
+        fi
     fi
-fi
 
-if [[ -d "${HOMEBREW_PREFIX}/sbin/" ]]; then
-    export PATH="${HOMEBREW_PREFIX}/sbin:${PATH}"
-fi
-
-# Use homebrew bash completion
-if type brew &>/dev/null; then
-    # for COMPLETION in "$HOMEBREW_PREFIX"/etc/bash_completion.d/*
-    # do
-    #     [[ -f $COMPLETION ]] && source "$COMPLETION"
-    # done
-    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]];
-    then
-        source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+    if [[ -d "${BREW_PREFIX}/sbin/" ]]; then
+        export PATH="${BREW_PREFIX}/sbin:${PATH}"
     fi
-fi
 
-# Prefer sqlite from the homebrew keg-only path if available
-# Note: Android SDK includes an older sqlite without readline, do not want
-# MacOS also has an older sqlite we don't want either
-if [[ -d /usr/local/opt/sqlite/bin/ ]]; then
-    export PATH="/usr/local/opt/sqlite/bin/:${PATH}";
+    # Use homebrew bash completion
+    if type brew &>/dev/null; then
+        # for COMPLETION in "$BREW_PREFIX"/etc/bash_completion.d/*
+        # do
+        #     [[ -f $COMPLETION ]] && source "$COMPLETION"
+        # done
+        if [[ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]];
+        then
+            source "${BREW_PREFIX}/etc/profile.d/bash_completion.sh"
+        fi
+    fi
+
+    # Prefer sqlite from the homebrew keg-only path if available
+    # Note: Android SDK includes an older sqlite without readline, do not want
+    # MacOS also has an older sqlite we don't want either
+    if [[ -d /usr/local/opt/sqlite/bin/ ]]; then
+        export PATH="/usr/local/opt/sqlite/bin/:${PATH}";
+    fi
+
 fi
