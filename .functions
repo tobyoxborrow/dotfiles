@@ -112,3 +112,28 @@ function typetext() {
 function typepb() {
     typetext "$(pbpaste)"
 }
+
+
+function figlet_all() {
+    text_to_embiggen=$*
+    if [[ -z $text_to_embiggen ]]; then
+        echo "Usage: figlet_all <text-to-embiggen>"
+        return
+    fi
+    for font in $(find $(figlet -I2) -depth 1 -name *.flf); do
+        echo $font; figlet -w128 -f $(basename $font) $text_to_embiggen;
+    done
+}
+
+
+function figlet_fav() {
+    text_to_embiggen=$*
+    if [[ -z $text_to_embiggen ]]; then
+        echo "Usage: figlet_all <text-to-embiggen>"
+        return
+    fi
+    fonts=(small standard big speed starwars doom cricket rectangles chunky block lean stop rounded larry3d cyberlarge basic roman nancyj thick colossal univers rozzo)
+    for font in ${fonts[@]}; do
+        echo $font; figlet -w128 -f $(basename $font) $text_to_embiggen;
+    done
+}
