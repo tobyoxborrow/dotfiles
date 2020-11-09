@@ -157,6 +157,7 @@ nnoremap <leader>r :Rg<SPACE>
 " :help spell
 " Builtin: ]s (next misspelling), [s (prev), z= (suggest), zg (add)
 nnoremap <leader>s :setlocal spell spelllang=en_gb<CR>
+nnoremap <leader>S :setlocal nospell<CR>
 
 " map ,t to call TrimWhiteSpace()
 nnoremap <leader>t :call TrimWhiteSpace()<CR>
