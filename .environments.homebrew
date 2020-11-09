@@ -1,26 +1,27 @@
 # Homebrew
 
+HOMEBREW_PREFIX=$(brew --prefix)
+
 # Prefer homebrew binaries over any locally installed ones
-if [[ -d /usr/local/bin/ ]]; then
-    export PATH="/usr/local/bin:${PATH}"
-    # coreutils gnubin
-    if [[ -d /usr/local/opt/coreutils/libexec/gnubin ]]; then
-        export PATH="/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
+if [[ -d "${HOMEBREW_PREFIX}/bin/" ]]; then
+    export PATH="${HOMEBREW_PREFIX}/bin:${PATH}"
+    # gnubin contains gnu versions of many core utils, such as: cat, ls, sort
+    if [[ -d "${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin" ]]; then
+        export PATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin:${PATH}"
     fi
 fi
 
-if [[ -d /usr/local/sbin/ ]]; then
-    export PATH="/usr/local/sbin:${PATH}"
+if [[ -d "${HOMEBREW_PREFIX}/sbin/" ]]; then
+    export PATH="${HOMEBREW_PREFIX}/sbin:${PATH}"
 fi
 
 # Use homebrew bash completion
-HOMEBREW_PREFIX=$(brew --prefix)
 if type brew &>/dev/null; then
-    for COMPLETION in "$HOMEBREW_PREFIX"/etc/bash_completion.d/*
-    do
-        [[ -f $COMPLETION ]] && source "$COMPLETION"
-    done
-    if [[ -f ${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh ]];
+    # for COMPLETION in "$HOMEBREW_PREFIX"/etc/bash_completion.d/*
+    # do
+    #     [[ -f $COMPLETION ]] && source "$COMPLETION"
+    # done
+    if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]];
     then
         source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
     fi

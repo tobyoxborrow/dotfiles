@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+HOMEBREW_PREFIX=$(brew --prefix)
 
 # Dynamic Prompt - minimal but informative
 # ~ (toby user on primary workstation in $HOME)
