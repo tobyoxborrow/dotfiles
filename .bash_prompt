@@ -18,9 +18,6 @@ if [ "${USER}" == "tobyox" ]; then
     PROMPT_USER=""
 fi
 PROMPT_HOSTNAME="@\H"
-if [ "${HOSTNAME}" == "TOBYOX-M-N20Q" ]; then
-    PROMPT_HOSTNAME=""
-fi
 if [ "${HOSTNAME}" == "TOBYOX-M-C77V" ]; then
     PROMPT_HOSTNAME=""
 fi
