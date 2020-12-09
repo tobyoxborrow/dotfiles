@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-
-HOMEBREW_PREFIX=$(brew --prefix)
-
 # Dynamic Prompt - minimal but informative
+# Examples:
 # ~ (toby user on primary workstation in $HOME)
 # % (toby user on primary workstation in some other dir)
 # @host~ (toby user on host "host" in $HOME)
@@ -23,17 +21,7 @@ if [ "${HOSTNAME}" == "TOBYOX-M-C77V" ]; then
 fi
 MY_OLDPWD="${PWD}"
 
-GIT_PROMPT=""
-if [[ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]]; then
-    export GIT_PS1_SHOWDIRTYSTATE=1
-    export GIT_PS1_SHOWUNTRACKEDFILES=1
-    export GIT_PS1_SHOWUPSTREAM="verbose name"
-    export GIT_PS1_SHOWCOLORHINTS=""
-    export GIT_PS1_SHOWSTASHSTATE=""
-    GIT_PROMPT='$(__git_ps1 "(%s) ")'
-fi
-
-# colour codes
+# Colour codes
 # colours need to be escaped with \[ \] in prompts so the shell can count the
 # proper length. otherwise the prompt gets corrupted when scrolling up/down
 C_OFF='\e[0m'
@@ -54,6 +42,7 @@ function dynamicPrompt {
     if [ "${EXITSTATUS}" -gt 0 ]; then
         PROMPT_COLOUR="${C_RED}"
     fi
+
     PROMPT_END="~"
     if [ "${PWD}" != "${HOME}" ]; then
         PROMPT_END="%"
@@ -61,13 +50,22 @@ function dynamicPrompt {
     if [ "${USER}" == "root" ]; then
         PROMPT_END="#"
     fi
-    PS1="${GIT_PROMPT}\[${PROMPT_COLOUR}\]${PROMPT_USER}${PROMPT_HOSTNAME}${PROMPT_END}\[${C_OFF}\] "
+
+    PS1="\[${PROMPT_COLOUR}\]${PROMPT_USER}${PROMPT_HOSTNAME}${PROMPT_END}\[${C_OFF}\] "
+
+    # to keep the prompt very minimal the current directory is not shown, it is
+    # assumed you would generally know which directory you are in and if you
+    # need to know there are commands available to find out. but as a helper,
+    # as you change directories the current full directory path is shown.
     if [ "${PWD}" != "${MY_OLDPWD}" ]; then
         MY_OLDPWD="${PWD}"
+        # The colourcodes don't work in the bash v3 (included with macOS) so
+        # will not be shown. The bash in homebrew though is more up-to-date and
+        # can handle them.
         if [[ ${BASH_VERSINFO[0]} -gt 3 ]]; then
-            # these colourcodes don't seem to work on OSX's bash v3
             echo -e "${C_OFF}cwd: ${C_BLUE}${PWD}${C_OFF}"
         fi
     fi
 }
-PROMPT_COMMAND=dynamicPrompt
+
+PROMPT_COMMAND="dynamicPrompt"
