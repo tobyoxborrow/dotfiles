@@ -4,8 +4,12 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-backup_dir="${HOME}/.dotfiles_backup"
 dotfiles_dir="${HOME}/.dotfiles"
+backup_dir="${HOME}/.dotfiles_backup"
+config_dir="${HOME}/.config"
+
+mkdir -p "$backup_dir"
+mkdir -p "$config_dir"
 
 dotfiles=(
     .ackrc
@@ -39,9 +43,8 @@ dotfiles=(
     .tmux.conf.theme
     .vimrc
     .wgetrc
+    .config/starship.toml
     )
-
-mkdir -p "$backup_dir"
 
 # Try to find GNU readlink from homebrew's coreutils package for macOS
 # The readlink in macOS doesn't support some of the options I want

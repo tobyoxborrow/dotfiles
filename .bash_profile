@@ -8,10 +8,17 @@ set -o vi
 PS1="\u@\h \W\$ "
 
 # Load the shell dotfiles, and then some:
-for file in ~/.{path,bash_prompt,exports,environments,aliases,functions,extra}; do
+for file in ~/.{path,exports,environments,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
+
+# Use starship if available, otherwise fallback to my own dynamic bash prompt
+if hash starship 2>/dev/null; then
+    eval "$(starship init bash)"
+else
+	[ -r ".bash_prompt" ] && [ -f ".bash_prompt" ] && source ".bash_prompt";
+fi
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
