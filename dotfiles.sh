@@ -24,6 +24,7 @@ dotfiles=(
     .environments.pyenv
     .environments.rust
     .environments.rvm
+    .environments.tag
     .exports
     .functions
     .gitconfig

@@ -9,3 +9,4 @@ source ~/.environments.pipenv
 source ~/.environments.pyenv
 source ~/.environments.rvm
 source ~/.environments.rust
+source ~/.environments.tag
