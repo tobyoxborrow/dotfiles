@@ -18,15 +18,8 @@ if which brew &>/dev/null; then
     fi
 
     # Use homebrew bash completion
-    if type brew &>/dev/null; then
-        # for COMPLETION in "$BREW_PREFIX"/etc/bash_completion.d/*
-        # do
-        #     [[ -f $COMPLETION ]] && source "$COMPLETION"
-        # done
-        if [[ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]];
-        then
-            source "${BREW_PREFIX}/etc/profile.d/bash_completion.sh"
-        fi
+    if [[ -r "${BREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+        source "${BREW_PREFIX}/etc/profile.d/bash_completion.sh"
     fi
 
     # Prefer sqlite from the homebrew keg-only path if available
