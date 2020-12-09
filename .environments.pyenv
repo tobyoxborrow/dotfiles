@@ -1,5 +1,4 @@
 # pyenv - Python environment manager
 if [[ -d "${HOME}/.pyenv/" ]]; then
-    eval "$(pyenv init -)"
+    eval "$(pyenv init - bash)"
 fi
-
