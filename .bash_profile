@@ -33,7 +33,3 @@ done;
 if [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
-
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults;
