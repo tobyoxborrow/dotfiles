@@ -1,30 +1,23 @@
 # tmux theme by Toby Oxborrow
 
 # panes
-set -g pane-border-fg black
-set -g pane-border-bg default
-set -g pane-active-border-fg colour166
-set -g pane-active-border-bg default
+set -g pane-border-style fg=black,bg=default
+set -g pane-active-border-style fg=colour166,bg=default
 
 # status bar general
 set -g status-position bottom
 set -g status-justify left
 set -g status-interval 2
-set -g status-attr default
-set -g status-fg default
-set -g status-bg black
+set -g status-style fg=default,bg=black,default
 
 # status bar left and right contents
 set -g status-left ''
 set -g status-right '#[fg=black,bg=colour166,bold] #h '
 
 # window status
-setw -g window-status-fg colour166
-setw -g window-status-bg default
-setw -g window-status-attr none
+setw -g window-status-style fg=colour166,bg=default,none
 setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244]#F '
 
 # window status - current window
-setw -g window-status-current-fg black
-setw -g window-status-current-bg colour166
+setw -g window-status-current-style fg=black,bg=colour166
 setw -g window-status-current-format ' #I#[fg=colour240]:#[fg=black]#W#[fg=colour240]#F '
