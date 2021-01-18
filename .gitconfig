@@ -197,3 +197,5 @@
 	email = tobyox@cisco.com
 [commit]
 	template = ~/.stCommitMsg
+[init]
+	defaultBranch = master
