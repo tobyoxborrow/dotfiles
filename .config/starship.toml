@@ -15,7 +15,8 @@ error_symbol = "%"
 
 # if python is enabled (and maybe its just pyenv) the shell speed is very slow
 [python]
-disabled = true
+symbol = ""
+# disabled = true
 
 [git_branch]
 symbol = ""
