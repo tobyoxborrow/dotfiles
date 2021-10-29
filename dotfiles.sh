@@ -38,6 +38,7 @@ dotfiles=(
     .profile
     .rvmrc
     .screenrc
+    .stCommitMsg
     .tmux.conf
     .tmux.conf.local
     .tmux.conf.theme
