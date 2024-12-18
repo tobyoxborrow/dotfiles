@@ -38,7 +38,7 @@ PYENVALIAS1=""
 PYENVALIAS2=""
 if [[ -d "${HOME}/.pyenv/" ]]; then
     # version of python expected to be used by vim (and YouCompleteMe)
-    PYENVVER=$(pyenv versions --bare | sort -n | tail -1)
+    PYENVVER=$(pyenv versions --bare | sort --sort=version | tail -1)
     PYENVALIAS1="pyenv shell $PYENVVER; pip install --upgrade pip; "
     PYENVALIAS2="pyenv rehash; pyenv shell -; "
 fi
