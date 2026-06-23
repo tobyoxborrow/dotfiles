@@ -29,6 +29,7 @@ dotfiles=(
     .environments.pyenv
     .environments.rust
     .environments.rvm
+    .environments.ssh_agent
     .environments.tag
     .exports
     .functions

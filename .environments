@@ -10,4 +10,5 @@ source ~/.environments.pipenv
 source ~/.environments.pyenv
 source ~/.environments.rvm
 source ~/.environments.rust
+source ~/.environments.ssh_agent
 source ~/.environments.tag
