@@ -382,7 +382,7 @@ set t_Co=256
 try
     colorscheme pencil
 catch
-    colorscheme desert
+    colorscheme default
 endtry
 
 " disable any background colour set by the theme

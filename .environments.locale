@@ -1,0 +1,7 @@
+# Prefer US English locale and use UTF-8
+if locale -a 2>/dev/null | grep --silent --no-messages --ignore-case "en_US.utf8"; then
+    export LANG="en_US.utf8"
+    export LC_ALL="en_US.utf8"
+else
+    echo "Locale en_US.utf8 not found. Generate with: locale-gen en_US.utf8"
+fi
