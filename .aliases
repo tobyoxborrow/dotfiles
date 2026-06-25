@@ -82,8 +82,17 @@ alias git_undo="git reset --soft HEAD^"
 # visualise git branches and merges
 alias git_graph='git log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
 
+alias git_switch_main="git switch main"
+alias gsm="git_switch_main"
+
+alias git_switch_main_and_pull="git switch main; git pull"
+alias gsmp="git_switch_main_and_pull"
+
 # terminal colour guide
 alias colours='for i in {0..255}; do printf "\x1b[38;5;${i}mcolour%-5i\x1b[0m" $i ; if ! (( ($i + 1 ) % 8 )); then echo ; fi ; done'
 
 # display web server response headers
 alias headers="curl -s -D - -o /dev/null"
+
+# proxy curl through a local burp scanner
+alias curl-to-burp="curl --proxy 127.0.0.1:8080"
