@@ -184,9 +184,7 @@ nnoremap N Nzzzv
 
 " Use vim-plug for plugins
 " Installation instructions, see https://github.com/junegunn/vim-plug
-" Or run:
-" ~ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" Or run vim-plug-install.sh
 " Fresh install: plugins need to be installed with ":PlugInstall"
 if filereadable(glob('~/.vim/autoload/plug.vim'))
     " Plugin list
@@ -382,7 +380,7 @@ set t_Co=256
 try
     colorscheme pencil
 catch
-    colorscheme desert
+    colorscheme default
 endtry
 
 " disable any background colour set by the theme

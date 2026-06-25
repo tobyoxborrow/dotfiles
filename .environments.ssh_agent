@@ -1,0 +1,6 @@
+# SSH Agent
+if [[ -f /usr/bin/ssh-agent ]]; then
+    # exec $(/usr/bin/ssh-agent -s)
+    /usr/bin/ssh-agent -s > /tmp/ssh-agent.sh
+    source /tmp/ssh-agent.sh &>/dev/null
+fi

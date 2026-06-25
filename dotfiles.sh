@@ -23,11 +23,13 @@ dotfiles=(
     .environments.bat
     .environments.golang
     .environments.homebrew
+    .environments.locale
     .environments.perlbrew
     .environments.pipenv
     .environments.pyenv
     .environments.rust
     .environments.rvm
+    .environments.ssh_agent
     .environments.tag
     .exports
     .functions

@@ -1,6 +1,7 @@
 #!/bin/bash
 # Set up various environments
 
+source ~/.environments.locale
 source ~/.environments.bat
 source ~/.environments.golang
 source ~/.environments.homebrew
@@ -9,4 +10,5 @@ source ~/.environments.pipenv
 source ~/.environments.pyenv
 source ~/.environments.rvm
 source ~/.environments.rust
+source ~/.environments.ssh_agent
 source ~/.environments.tag
