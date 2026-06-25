@@ -81,6 +81,14 @@ function git_delete_features() {
     done
 }
 
+function git_new_branch() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage git_new_branch <branch/name>"
+        return
+    fi
+    git branch -m $1
+}
+
 # type some text using AppleScript
 # for when you have some stubborn application that won't accept paste
 function typetext() {
@@ -136,4 +144,13 @@ function figlet_fav() {
     for font in ${fonts[@]}; do
         echo $font; figlet -w128 -f $(basename $font) $text_to_embiggen;
     done
+}
+
+
+function activate() {
+    if [[ -e .venv/bin/activate ]]; then
+        source .venv/bin/activate
+    elif [[ -e venv/bin/activate ]]; then
+        source venv/bin/activate
+    fi
 }
