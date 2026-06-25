@@ -1,0 +1,7 @@
+# Add tab completion for many Bash commands
+
+if [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
+fi
+
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"

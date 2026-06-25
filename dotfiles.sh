@@ -20,6 +20,7 @@ dotfiles=(
     .bashrc
     .curlrc
     .environments
+    .environments.bash-completion
     .environments.bat
     .environments.golang
     .environments.homebrew

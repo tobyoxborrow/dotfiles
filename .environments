@@ -2,6 +2,7 @@
 # Set up various environments
 
 source ~/.environments.locale
+source ~/.environments.bash-completion
 source ~/.environments.bat
 source ~/.environments.golang
 source ~/.environments.homebrew
