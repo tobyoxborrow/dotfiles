@@ -1,2 +1,5 @@
 # bat
-export BAT_THEME=GitHub
+
+if which bat &>/dev/null; then
+    export BAT_THEME=GitHub
+fi
