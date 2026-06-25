@@ -9,7 +9,8 @@ source ~/.environments.homebrew
 source ~/.environments.perlbrew
 source ~/.environments.pipenv
 source ~/.environments.pyenv
-source ~/.environments.rvm
 source ~/.environments.rust
+source ~/.environments.rvm
 source ~/.environments.ssh_agent
+source ~/.environments.starship
 source ~/.environments.tag

@@ -1,6 +1,12 @@
 # Don't print a new line at the start of the prompt
 add_newline = false
 
+[username]
+show_always = false
+
+[directory]
+style = "bold yellow"
+
 # single line prompt
 [line_break]
 disabled = true

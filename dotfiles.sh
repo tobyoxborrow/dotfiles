@@ -31,6 +31,7 @@ dotfiles=(
     .environments.rust
     .environments.rvm
     .environments.ssh_agent
+    .environments.starship
     .environments.tag
     .exports
     .functions
