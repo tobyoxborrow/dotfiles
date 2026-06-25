@@ -1,8 +1,9 @@
 # Homebrew
 
-if which brew &>/dev/null; then
 
-    BREW_PREFIX=$(brew --prefix)
+if [[ -f /opt/homebrew/bin/brew ]]; then
+
+    BREW_PREFIX=$(/opt/homebrew/bin/brew --prefix)
 
     # Prefer homebrew binaries over any locally installed ones
     if [[ -d "${BREW_PREFIX}/bin/" ]]; then
@@ -28,5 +29,9 @@ if which brew &>/dev/null; then
     if [[ -d /usr/local/opt/sqlite/bin/ ]]; then
         export PATH="/usr/local/opt/sqlite/bin/:${PATH}";
     fi
+
+    # do not print any hints about changing Homebrew’s behaviour with
+    # environment variables
+    export HOMEBREW_NO_ENV_HINTS=1
 
 fi
